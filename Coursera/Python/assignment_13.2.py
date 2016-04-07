@@ -15,26 +15,22 @@
 #     ...
 #   ]
 # }
-
+import urllib
 import json
 
-input = '''
-[
-  { "id" : "001",
-    "x" : "2",
-    "name" : "Chuck"
-  } ,
-  { "id" : "009",
-    "x" : "7",
-    "name" : "Chuck"
-  } 
-]'''
+while True:
+    url = raw_input('Enter location: ')
+    if len(url) < 1 : break
 
-info = json.loads(input)
-print 'User count:', len(info)
+    print 'Retrieving', url
+    data = urllib.urlopen(url).read()
+    print 'Retrieved',len(data),'characters'
 
-for item in info:
-    print 'Name', item['name']
-    print 'Id', item['id']
-    print 'Attribute', item['x']
+    info = json.loads(data)
+    print 'User count:', len(info['comments'])
+    sum = 0
+
+    for item in info['comments']:
+        sum += item['count']
+    print 'Sum', sum
 
