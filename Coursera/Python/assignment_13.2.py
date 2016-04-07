@@ -1,3 +1,21 @@
+# Sample data: http://python-data.dr-chuck.net/comments_42.json (Sum=2553)
+# Actual data: http://python-data.dr-chuck.net/comments_245528.json (Sum ends with 74)
+#
+# Data Format
+# {
+#   comments: [
+#     {
+#       name: "Matthias"
+#       count: 97
+#     },
+#     {
+#       name: "Geomer"
+#       count: 97
+#     }
+#     ...
+#   ]
+# }
+
 import json
 
 input = '''
