@@ -20,14 +20,14 @@ for line in fh:
     email = pieces[1]
     org = email.split("@")[1]
     print org
-    cur.execute('SELECT count FROM Counts WHERE org = ? ', (email, ))
+    cur.execute('SELECT count FROM Counts WHERE org = ? ', (org, ))
     row = cur.fetchone()
     if row is None:
         cur.execute('''INSERT INTO Counts (org, count)
-                VALUES ( ?, 1 )''', ( email, ) )
+                VALUES ( ?, 1 )''', ( org, ) )
     else :
         cur.execute('UPDATE Counts SET count=count+1 WHERE org = ?', 
-            (email, ))
+            (org, ))
 
 conn.commit()
 
