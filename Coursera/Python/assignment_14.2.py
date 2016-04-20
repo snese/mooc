@@ -18,18 +18,16 @@ for line in fh:
     if not line.startswith('From: ') : continue
     pieces = line.split()
     email = pieces[1]
-    print email
+    org = email.split("@")[1]
+    print org
     cur.execute('SELECT count FROM Counts WHERE org = ? ', (email, ))
     row = cur.fetchone()
     if row is None:
-        cur.execute('''INSERT INTO Counts (org, count) 
+        cur.execute('''INSERT INTO Counts (org, count)
                 VALUES ( ?, 1 )''', ( email, ) )
-    else : 
+    else :
         cur.execute('UPDATE Counts SET count=count+1 WHERE org = ?', 
             (email, ))
-    # This statement commits outstanding changes to disk each 
-    # time through the loop - the program can be made faster 
-    # by moving the commit so it runs only after the loop completes
 
 conn.commit()
 
